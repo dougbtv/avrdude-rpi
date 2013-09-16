@@ -1,5 +1,5 @@
-Using avrdude with the Raspberry Pi - The Raspberry Pi Vehicle Operating Platform FORK
-======================================================================================
+Using avrdude with the Raspberry Pi
+===================================
 
 Since the Raspberry Pi lacks a DTR pin that makes it oh-so-easy to upload your hex files into
 the avr, we need this hack to make it just as easy.  When you wire up your atmega chip, be sure
@@ -9,13 +9,23 @@ as if your serial cable actually had a dtr pin.
 So what's different in this fork? 
 ---------------------------------
 
-Not a ton! It just doesn't rely so heavily on the timing (which I [and Serendipity, thank you] struggled with). 
+It's for The Raspberry Pi Vehicle Operating Platform, a control board for powering your raspberry pi smoothly from a vehicle.
+
+But, in short -- Not a ton is different! It just doesn't rely so heavily on the timing (which I [and Serendipity, thank you] struggled with). 
 It pull the pin high for reset, and when it sees the trigger here from the avrdude strace, it pulls it low.
 
 It's that simple of a mod. Also, preset for Raspberry GPIO pin 22.
 
 Instructions:
 -------------
+
+First! Intall GPIO.Rpi
+
+    easy_install RPi.GPIO
+
+If you're on Pidora, and you don't have easy_install, you can get it with:
+
+    yum install python-setuptools
 
 Copy both files into your /usr/bin directory, then rename the original avrdude to avrdude-original
 and symlink avrdude-autoreset to become avrdude.
