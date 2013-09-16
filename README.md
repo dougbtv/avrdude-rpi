@@ -1,10 +1,18 @@
-Using avrdude with the Raspberry Pi
-===================================
+Using avrdude with the Raspberry Pi - The Raspberry Pi Vehicle Operating Platform FORK
+======================================================================================
 
 Since the Raspberry Pi lacks a DTR pin that makes it oh-so-easy to upload your hex files into
 the avr, we need this hack to make it just as easy.  When you wire up your atmega chip, be sure
 to connect one of the digital gpio pins to the reset pin, and then you'll be able to use avrdude
 as if your serial cable actually had a dtr pin.
+
+So what's different in this fork? 
+---------------------------------
+
+Not a ton! It just doesn't rely so heavily on the timing (which I [and Serendipity, thank you] struggled with). 
+It pull the pin high for reset, and when it sees the trigger here from the avrdude strace, it pulls it low.
+
+It's that simple of a mod. Also, preset for Raspberry GPIO pin 22.
 
 Instructions:
 -------------
