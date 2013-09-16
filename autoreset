@@ -7,15 +7,15 @@ fd = sys.stdin.fileno()
 fl = fcntl.fcntl(fd, fcntl.F_GETFL)
 fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK)
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 dtr = re.compile('.+TIOCM_DTR.+')
 start = time.time()
 
+pin = 22
+GPIO.setup(pin, GPIO.OUT)
+GPIO.output(pin, GPIO.HIGH)
+
 def reset():
-  pin = 11
-  GPIO.setup(pin, GPIO.OUT)
-  GPIO.output(pin, GPIO.HIGH)
-  time.sleep(0.12)
   GPIO.output(pin, GPIO.LOW)
 
 def process():
@@ -32,4 +32,6 @@ def process():
       continue
 
 process()
+GPIO.cleanup()
 print "done with autoreset"
+
